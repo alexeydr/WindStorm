@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UI\SitcksInInventory.h"
+#include "UI\Bonefire_UI.h"
 #include "GameFramework/Character.h"
 #include "HeroCharacter.generated.h"
 
@@ -53,8 +55,22 @@ protected:
 	UFUNCTION()
 		void OpenInventory();
 
-public:	
+	UFUNCTION()
+		void SpawnBonefire();
 
+	UPROPERTY(EditDefaultsOnly, Category = "BonefireClass")
+		TSubclassOf<ABonefire> BonefireClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "WidgetClass")
+		TSubclassOf<USitcksInInventory> StickUIClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "WidgetClass")
+	TSubclassOf<UBonefire_UI> InventoryWidgetClass;
+
+	UPROPERTY()
+	class UBonefire_UI* WidgetRef;
+
+public:	
 
 	TArray<class AInteractActor*> Inventory;
 

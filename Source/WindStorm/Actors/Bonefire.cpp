@@ -85,7 +85,7 @@ void ABonefire::ActionOnInteract()
 
 
 	APlayerController* PC = Cast<APlayerController>(MainChar->GetController());
-	if (PC && UI_Class)
+	if (PC && UI_Class && StickInInvUI)
 	{
 
 		WidgetRef = CreateWidget<UBonefire_UI>(GetWorld(), UI_Class);
@@ -102,7 +102,7 @@ void ABonefire::ActionOnInteract()
 			AStick* Stick = Cast<AStick>(Elem);
 			if (Stick)
 			{
-				WidgetRef->AddItems(Stick);
+				WidgetRef->AddItems(Stick, StickInInvUI);
 			}
 		}
 

@@ -2,6 +2,7 @@
 
 
 #include "SitcksInInventory.h"
+#include "WindStorm\Actors\Stick.h"
 #include "WindStorm\UI\Bonefire_UI.h"
 #include "WindStorm\Actors\Bonefire.h"
 #include "Components\TextBlock.h"
@@ -16,6 +17,16 @@ void USitcksInInventory::OnAddClicked()
 	}
 }
 
+void USitcksInInventory::OnDropClicked()
+{
+	if (StickInInv)
+	{
+		StickInInv->SpawnThis(StickInInv);
+		Own->RemoveChildFromVB(this);
+	}
+
+}
+
 void USitcksInInventory::SynchronizeProperties()
 {
 	Super::SynchronizeProperties();
@@ -23,6 +34,11 @@ void USitcksInInventory::SynchronizeProperties()
 	if (Add)
 	{
 		Add->OnClicked.AddDynamic(this, &USitcksInInventory::OnAddClicked);
+	}
+
+	if (Drop)
+	{
+		Drop->OnClicked.AddDynamic(this, &USitcksInInventory::OnDropClicked);
 	}
 }
 

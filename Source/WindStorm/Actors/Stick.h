@@ -16,6 +16,11 @@ class WINDSTORM_API AStick : public AInteractActor
 
 public:
 
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<AStick> ClassForSpawn;
+
+	void SpawnThis(AStick* Stick);
+
 	UPROPERTY(EditAnywhere)
 		FString Name;
 

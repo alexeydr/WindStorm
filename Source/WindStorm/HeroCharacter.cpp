@@ -3,6 +3,10 @@
 
 #include "HeroCharacter.h"
 #include "Engine\Engine.h"
+#include "Blueprint/UserWidget.h"
+#include "Actors\Stick.h"
+#include "Actors\Bonefire.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Actors\InteractActor.h"
 #include "Components/InputComponent.h"
 #include "TimerManager.h"
@@ -20,6 +24,7 @@ void AHeroCharacter::SetupPlayerInputComponent(UInputComponent * PlayerInputComp
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Interaction", IE_Pressed, this, &AHeroCharacter::Interaction);
 	PlayerInputComponent->BindAction("OpenInventory", IE_Pressed, this, &AHeroCharacter::OpenInventory);
+	PlayerInputComponent->BindAction("SpawnBonefire", IE_Pressed, this, &AHeroCharacter::SpawnBonefire);
 }
 
 // Called when the game starts or when spawned
@@ -64,10 +69,46 @@ void AHeroCharacter::Interaction()
 
 void AHeroCharacter::OpenInventory()
 {
-	for (auto Elem: Inventory)
+	APlayerController* PC = Cast<APlayerController>(this->GetController());
+	if (PC && InventoryWidgetClass && StickUIClass)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("I have: %s"), *Elem->GetName());
+
+		WidgetRef = CreateWidget<UBonefire_UI>(GetWorld(), InventoryWidgetClass);
+
+		if (WidgetRef)
+			WidgetRef->AddToViewport();
+		else
+			return;
+
+
+		for (auto Elem : Inventory)
+		{
+			AStick* Stick = Cast<AStick>(Elem);
+			if (Stick)
+			{
+				WidgetRef->AddItems(Stick, StickUIClass);
+			}
+		}
+
+		PC->bShowMouseCursor = true;
+		UWidgetBlueprintLibrary::SetInputMode_UIOnly(PC, WidgetRef);
 	}
+
+
+}
+
+void AHeroCharacter::SpawnBonefire()
+{
+	FActorSpawnParameters Params;
+
+	Params.Owner = this;
+	auto Item = GetWorld()->SpawnActor<ABonefire>(BonefireClass, this->GetActorLocation(), FRotator::ZeroRotator, Params);
+
+	if (Item)
+	{
+
+	}
+
 }
 
 

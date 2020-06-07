@@ -21,15 +21,23 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 		class UTextBlock* Effect;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetOptional))
 		class UButton* Add;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetOptional))
+		class UButton* Drop;
 
 	UFUNCTION()
 		void OnAddClicked();
 
+	UFUNCTION()
+		void OnDropClicked();
+
 	float Eff;
 
 public:
+
+	class AStick* StickInInv;
 
 	class UBonefire_UI* Own;
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "InteractActor.h"
+#include "WindStorm\UI\SitcksInInventory.h"
 #include "WindStorm\UI\Bonefire_UI.h"
 #include "Bonefire.generated.h"
 
@@ -33,6 +34,10 @@ protected:
 
 	UFUNCTION()
 		void OnLifetimeComplete();
+
+
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<USitcksInInventory> StickInInvUI;
 
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<UBonefire_UI> UI_Class;

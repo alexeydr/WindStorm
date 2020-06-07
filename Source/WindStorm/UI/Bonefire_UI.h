@@ -20,8 +20,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 		class UVerticalBox* Items;
 
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<USitcksInInventory> StickInInvUI;
 
 public:
 
@@ -31,6 +29,6 @@ public:
 
 	virtual void SynchronizeProperties() override;
 
-	void AddItems(class AStick* Stick);
+	void AddItems(class AStick* Stick, TSubclassOf<USitcksInInventory> StickInInvUI);
 	
 };

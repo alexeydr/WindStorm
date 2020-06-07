@@ -33,13 +33,14 @@ void UBonefire_UI::SynchronizeProperties()
 
 }
 
-void UBonefire_UI::AddItems(AStick * Stick)
+void UBonefire_UI::AddItems(AStick * Stick, TSubclassOf<USitcksInInventory> StickInInvUI)
 {
 	if (Items && StickInInvUI)
 	{
 		USitcksInInventory* SitcksInInventoryRef = CreateWidget<USitcksInInventory>(GetWorld(), StickInInvUI);
 		if (SitcksInInventoryRef)
 		{
+			SitcksInInventoryRef->StickInInv = Stick;
 			SitcksInInventoryRef->SetParams(Stick->Name,Stick->BurnTime);
 			SitcksInInventoryRef->Own = this;
 
