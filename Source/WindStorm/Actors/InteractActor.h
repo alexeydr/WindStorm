@@ -26,7 +26,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 		FVector BoxEx = FVector(20, 20, 20);
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 		class UStaticMeshComponent* StaticMesh;
 
 

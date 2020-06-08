@@ -8,7 +8,7 @@ public class WindStorm : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","UMG", "Slate", "SlateCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","UMG", "Slate", "SlateCore", "CableComponent" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
