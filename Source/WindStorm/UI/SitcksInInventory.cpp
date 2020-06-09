@@ -3,6 +3,7 @@
 
 #include "SitcksInInventory.h"
 #include "WindStorm\Actors\FireActor.h"
+#include "WindStorm\Save_Load.h"
 #include "WindStorm\Actors\Stick.h"
 #include "WindStorm\UI\Bonefire_UI.h"
 #include "WindStorm\Actors\Bonefire.h"
@@ -13,9 +14,11 @@ void USitcksInInventory::OnAddClicked()
 {
 	if (Own->Owner)
 	{
+		USave_Load::SaveGame(this);
+
 		Own->RemoveChildFromVB(this);
 		Own->Owner->OnAddStick(Eff);
-	}
+	} 
 }
 
 void USitcksInInventory::OnDropClicked()

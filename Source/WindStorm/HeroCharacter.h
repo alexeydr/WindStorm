@@ -16,6 +16,9 @@ class WINDSTORM_API AHeroCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AHeroCharacter();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats")
+		FString CharName;
 		
 protected:
 
@@ -24,6 +27,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats")
 		bool NeedTemperature = false;
 

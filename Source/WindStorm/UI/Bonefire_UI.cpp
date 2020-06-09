@@ -2,6 +2,7 @@
 
 
 #include "Bonefire_UI.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "WindStorm\Actors\InteractActor.h"
 #include "WindStorm\Actors\Stick.h"
 #include "WindStorm\HeroCharacter.h"
@@ -25,6 +26,12 @@ void UBonefire_UI::RemoveChildFromVB(USitcksInInventory * Elem)
 			}
 		} 
 
+	}
+	if (Items->GetAllChildren().Num() <= 0)
+	{
+		UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(UGameplayStatics::GetPlayerController(GetWorld(),0));
+		this->RemoveFromParent();
 	}
 }
 
@@ -55,7 +62,6 @@ void UBonefire_UI::AddItems(AInteractActor * Actor, TSubclassOf<USitcksInInvento
 
 			Items->AddChildToVerticalBox(SitcksInInventoryRef);
 		}
-
 
 	}
 }
