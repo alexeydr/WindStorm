@@ -10,21 +10,23 @@
 void AStick::ActionOnInteract()
 {
 	Super::ActionOnInteract();
-
-	auto Stick = NewObject<AStick>(MainChar, AStick::StaticClass());
-
-	if (Stick)
+	if (MainChar->Inventory.Num() < 6)
 	{
-		Stick->BurnTime = this->BurnTime;
-		Stick->Name = this->Name;
-		Stick->SetActorScale3D(this->GetActorScale3D());
-		Stick->StaticMesh = this->StaticMesh;
-		Stick->ClassForSpawn = this->ClassForSpawn;
-		Stick->MainChar = this->MainChar;
+		auto Stick = NewObject<AStick>(MainChar, AStick::StaticClass());
+
+		if (Stick)
+		{
+			Stick->BurnTime = this->BurnTime;
+			Stick->Name = this->Name;
+			Stick->SetActorScale3D(this->GetActorScale3D());
+			Stick->StaticMesh = this->StaticMesh;
+			Stick->ClassForSpawn = this->ClassForSpawn;
+			Stick->MainChar = this->MainChar;
+		}
+		MainChar->Inventory.Add(Stick);
+
+		this->Destroy();
 	}
-	MainChar->Inventory.Add(Stick);
-	
-	this->Destroy();
 }
 
 void AStick::SpawnThis(AStick* Stick)

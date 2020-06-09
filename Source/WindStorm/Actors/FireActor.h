@@ -17,6 +17,8 @@ class WINDSTORM_API AFireActor : public AInteractActor
 
 public:
 
+	void SpawnActor();
+
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AFireActor> ClassForSpawn;
 

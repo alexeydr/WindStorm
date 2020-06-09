@@ -22,8 +22,6 @@ public:
 	UPROPERTY(EditAnywhere)
 		FString Name;
 
-protected:
-
 	class UBoxComponent* BoxComp;
 
 	class AHeroCharacter* MainChar;
