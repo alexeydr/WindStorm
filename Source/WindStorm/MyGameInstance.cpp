@@ -10,6 +10,7 @@
 UMyGameInstance::UMyGameInstance()
 {
 	Load_Map_Delegate = FCoreUObjectDelegates::PostLoadMapWithWorld.AddUObject(this, &UMyGameInstance::ChangeLevel);
+
 }
 
 void UMyGameInstance::ChangeLevel(UWorld* World)

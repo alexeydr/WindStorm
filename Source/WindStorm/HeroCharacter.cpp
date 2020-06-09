@@ -5,6 +5,7 @@
 #include "Engine\Engine.h"
 #include "Blueprint/UserWidget.h"
 #include "Actors\Stick.h"
+#include "GameFramework/GameUserSettings.h"
 #include "Actors\FireActor.h"
 #include "Actors\Bonefire.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
@@ -38,6 +39,15 @@ void AHeroCharacter::BeginPlay()
 		FTimerHandle FuzeTimerHandle;
 		GetWorld()->GetTimerManager().SetTimer(FuzeTimerHandle, this, &AHeroCharacter::OnFreeze, 0.5f, true);
 	}
+
+	auto GUS = UGameUserSettings::GetGameUserSettings();
+	if (GUS)
+	{
+		GUS->SetPostProcessingQuality(1);
+		GUS->ApplySettings(true);
+		GUS->SaveSettings();
+	}
+
 }
 
 void AHeroCharacter::Dead()
