@@ -23,5 +23,18 @@ public:
 	FVector AllyLocation;
 
 	UPROPERTY(VisibleAnywhere)
+		float MainCharHealth;
+
+	UPROPERTY(VisibleAnywhere)
+		float AllyHealth;
+
+	UPROPERTY(VisibleAnywhere)
+		float MainCharTemp;
+
+	UPROPERTY(VisibleAnywhere)
+		float AllyTemp;
+
+
+	UPROPERTY(VisibleAnywhere)
 	uint32 UserIndex;
 };

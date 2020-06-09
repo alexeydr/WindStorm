@@ -109,7 +109,7 @@ void ABonefire::ActionOnInteract()
 		}
 
 		PC->bShowMouseCursor = true;
-		UWidgetBlueprintLibrary::SetInputMode_UIOnly(PC, WidgetRef);
+		UWidgetBlueprintLibrary::SetInputMode_GameAndUI(PC, WidgetRef);
 	}
 
 
