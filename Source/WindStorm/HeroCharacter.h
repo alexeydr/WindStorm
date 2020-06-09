@@ -49,6 +49,9 @@ protected:
 		void UpdateUI();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "UI")
+		void DieUI();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "UI")
 		void CreateFreezeUI();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "UI")

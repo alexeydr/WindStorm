@@ -54,7 +54,7 @@ void AHeroCharacter::Dead()
 {
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("U DIE!"));
+		this->DieUI();
 	}
 }
 
