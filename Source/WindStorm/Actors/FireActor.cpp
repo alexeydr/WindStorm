@@ -10,20 +10,12 @@ void AFireActor::ActionOnInteract()
 {
 	Super::ActionOnInteract();
 
-	auto Stick = NewObject<AFireActor>(MainChar, AFireActor::StaticClass());
-
-	if (Stick)
+	if (MainChar->Inventory.Num() < 6)
 	{
-		Stick->Name = this->Name;
-		Stick->SetActorScale3D(this->GetActorScale3D());
-		Stick->StaticMesh = this->StaticMesh;
-		Stick->ClassForSpawn = this->ClassForSpawn;
-		Stick->MainChar = this->MainChar;
+		this->SpawnActor();
+
+		this->Destroy();
 	}
-	MainChar->Inventory.Add(Stick);
-
-	this->Destroy();
-
 }
 
 void AFireActor::SpawnThis(AFireActor * Act)
@@ -41,4 +33,23 @@ void AFireActor::SpawnThis(AFireActor * Act)
 		Item->MainChar = Item->MainChar;
 
 	}
+}
+
+void AFireActor::SpawnActor()
+{
+	auto Stick = NewObject<AFireActor>(MainChar, AFireActor::StaticClass());
+
+	if (Stick)
+	{
+		Stick->Name = this->Name;
+		Stick->SetActorScale3D(this->GetActorScale3D());
+		Stick->StaticMesh = this->StaticMesh;
+		Stick->ClassForSpawn = this->ClassForSpawn;
+		Stick->MainChar = this->MainChar;
+	}
+	MainChar->Inventory.Add(Stick);
+
+
+
+
 }
