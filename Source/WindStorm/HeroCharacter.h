@@ -25,7 +25,7 @@ protected:
 	virtual void BeginPlay() override;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats")
-		bool NeedTemperature;
+		bool NeedTemperature = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats")
 		float Health = 100.f;
@@ -48,6 +48,14 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "UI")
 		void RemoveFreezeUI();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Fire")
+		void EffectFire(bool AttachOrDeattach);
+
+	bool FlipFlop = true;
+
+	UFUNCTION()
+		void GetFire();
 
 	UFUNCTION()
 		void Interaction();

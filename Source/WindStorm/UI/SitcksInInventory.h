@@ -37,12 +37,12 @@ protected:
 
 public:
 
-	class AStick* StickInInv;
+	class AInteractActor* Item;
 
 	class UBonefire_UI* Own;
 
 	virtual void SynchronizeProperties() override;
 
-	void SetParams(FString ItemName, float ItemEffect);
+	void SetParams(FString ItemName, float ItemEffect = 0);
 	
 };

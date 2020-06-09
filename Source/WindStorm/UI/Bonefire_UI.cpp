@@ -2,6 +2,7 @@
 
 
 #include "Bonefire_UI.h"
+#include "WindStorm\Actors\InteractActor.h"
 #include "WindStorm\Actors\Stick.h"
 #include "WindStorm\HeroCharacter.h"
 #include "Kismet\GameplayStatics.h"
@@ -33,15 +34,23 @@ void UBonefire_UI::SynchronizeProperties()
 
 }
 
-void UBonefire_UI::AddItems(AStick * Stick, TSubclassOf<USitcksInInventory> StickInInvUI)
+void UBonefire_UI::AddItems(AInteractActor * Actor, TSubclassOf<USitcksInInventory> StickInInvUI)
 {
 	if (Items && StickInInvUI)
 	{
 		USitcksInInventory* SitcksInInventoryRef = CreateWidget<USitcksInInventory>(GetWorld(), StickInInvUI);
 		if (SitcksInInventoryRef)
 		{
-			SitcksInInventoryRef->StickInInv = Stick;
-			SitcksInInventoryRef->SetParams(Stick->Name,Stick->BurnTime);
+			SitcksInInventoryRef->Item = Actor;
+			AStick* Stick = Cast<AStick>(Actor);
+			if (Stick)
+			{
+				SitcksInInventoryRef->SetParams(Stick->Name, Stick->BurnTime);
+			}
+			else
+			{
+				SitcksInInventoryRef->SetParams(Actor->Name);
+			}
 			SitcksInInventoryRef->Own = this;
 
 			Items->AddChildToVerticalBox(SitcksInInventoryRef);

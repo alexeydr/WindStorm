@@ -17,6 +17,11 @@ public:
 
 	virtual void ActionOnInteract() {};
 
+	virtual void SpawnThis(AInteractActor* Act) {};
+
+	UPROPERTY(EditAnywhere)
+		FString Name;
+
 protected:
 
 	class UBoxComponent* BoxComp;

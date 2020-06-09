@@ -29,6 +29,6 @@ public:
 
 	virtual void SynchronizeProperties() override;
 
-	void AddItems(class AStick* Stick, TSubclassOf<USitcksInInventory> StickInInvUI);
+	void AddItems(class AInteractActor* Actor, TSubclassOf<USitcksInInventory> StickInInvUI);
 	
 };

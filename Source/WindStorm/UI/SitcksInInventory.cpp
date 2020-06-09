@@ -2,6 +2,7 @@
 
 
 #include "SitcksInInventory.h"
+#include "WindStorm\Actors\FireActor.h"
 #include "WindStorm\Actors\Stick.h"
 #include "WindStorm\UI\Bonefire_UI.h"
 #include "WindStorm\Actors\Bonefire.h"
@@ -19,9 +20,20 @@ void USitcksInInventory::OnAddClicked()
 
 void USitcksInInventory::OnDropClicked()
 {
-	if (StickInInv)
+	if (Item)
 	{
-		StickInInv->SpawnThis(StickInInv);
+		AStick* Stick = Cast<AStick>(Item);
+		if (Stick)
+		{
+			Stick->SpawnThis(Stick);
+		}
+		AFireActor* FireActor = Cast<AFireActor>(Item);
+		if(FireActor)
+		{
+
+			FireActor->SpawnThis(FireActor);
+		}
+
 		Own->RemoveChildFromVB(this);
 	}
 
@@ -47,7 +59,10 @@ void USitcksInInventory::SetParams(FString ItemName, float ItemEffect)
 	if (Name && Effect)
 	{
 		Name->SetText(FText::FromString(ItemName));
-		Effect->SetText(FText::FromString(FString::FromInt((int)ItemEffect)));
-		Eff = ItemEffect;
+		if (ItemEffect != 0)
+		{
+			Effect->SetText(FText::FromString(FString::FromInt((int)ItemEffect)));
+			Eff = ItemEffect;
+		}
 	}
 }

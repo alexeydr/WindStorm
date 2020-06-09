@@ -21,8 +21,6 @@ public:
 
 	void SpawnThis(AStick* Stick);
 
-	UPROPERTY(EditAnywhere)
-		FString Name;
 
 	UPROPERTY(EditAnywhere)
 		float BurnTime = 5.f;

@@ -5,6 +5,7 @@
 #include "Engine\Engine.h"
 #include "Blueprint/UserWidget.h"
 #include "Actors\Stick.h"
+#include "Actors\FireActor.h"
 #include "Actors\Bonefire.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Actors\InteractActor.h"
@@ -24,7 +25,7 @@ void AHeroCharacter::SetupPlayerInputComponent(UInputComponent * PlayerInputComp
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Interaction", IE_Pressed, this, &AHeroCharacter::Interaction);
 	PlayerInputComponent->BindAction("OpenInventory", IE_Pressed, this, &AHeroCharacter::OpenInventory);
-	PlayerInputComponent->BindAction("SpawnBonefire", IE_Pressed, this, &AHeroCharacter::SpawnBonefire);
+	PlayerInputComponent->BindAction("GetFire", IE_Pressed, this, &AHeroCharacter::GetFire);
 }
 
 // Called when the game starts or when spawned
@@ -59,6 +60,24 @@ void AHeroCharacter::OnFreeze()
 	}
 }
 
+void AHeroCharacter::GetFire()
+{
+	for (int i = 0; i < Inventory.Num(); i++)
+	{
+		AFireActor* FA = Cast<AFireActor>(Inventory[i]);
+		if (FA && FlipFlop)
+		{
+			FlipFlop = false;
+			this->EffectFire(true);
+			Inventory.RemoveAt(i);
+			return;
+		}
+
+	}
+	FlipFlop = true;
+	this->EffectFire(false);
+}
+
 void AHeroCharacter::Interaction()
 {
 	if (InteractActor)
@@ -83,11 +102,7 @@ void AHeroCharacter::OpenInventory()
 
 		for (auto Elem : Inventory)
 		{
-			AStick* Stick = Cast<AStick>(Elem);
-			if (Stick)
-			{
-				WidgetRef->AddItems(Stick, StickUIClass);
-			}
+			WidgetRef->AddItems(Elem, StickUIClass);
 		}
 
 		PC->bShowMouseCursor = true;

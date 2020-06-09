@@ -24,7 +24,7 @@ protected:
 	 
 	void OnEndOverlap(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex) override;
 
-	float Lifetime = 60.f;
+	float Lifetime = 10.f;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "UI")
 		void ShowTime();

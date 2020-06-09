@@ -46,9 +46,12 @@ void ABonefire::OnEndOverlap(UPrimitiveComponent * OverlappedComp, AActor * Othe
 
 void ABonefire::OnWarm()
 {
-	for (auto Elem: Chars)
+	if (GetWorld()->GetTimerManager().GetTimerRemaining(BurnHandle) > 0)
 	{
-		Elem->AddTemperature(4.f);
+		for (auto Elem : Chars)
+		{
+			Elem->AddTemperature(4.f);
+		}
 	}
 }
 
@@ -63,7 +66,6 @@ void ABonefire::OnLifetimeComplete()
 		}
 		WidgetRef->RemoveFromParent();
 	}
-	this->Destroy();
 }
 
 void ABonefire::OnAddStick(float Time)

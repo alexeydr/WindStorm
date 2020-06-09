@@ -28,21 +28,21 @@ void AStick::ActionOnInteract()
 }
 
 void AStick::SpawnThis(AStick* Stick)
-{
-	FActorSpawnParameters Params;
+{	
+		FActorSpawnParameters Params;
 
-	Params.Owner = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-	auto Item = GetWorld()->SpawnActor<AStick>(ClassForSpawn, UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)->GetActorLocation() + FVector(100, 0, 0), FRotator::ZeroRotator, Params);
+		Params.Owner = MainChar;
+		auto Item = GetWorld()->SpawnActor<AStick>(ClassForSpawn, MainChar->GetActorLocation() + FVector(100, 0, 0), FRotator::ZeroRotator, Params);
 
-	if (Item)
-	{
-		Item->BurnTime = Stick->BurnTime;
-		Item->Name = Stick->Name;
-		Item->SetActorScale3D(Stick->GetActorScale3D());
-		Item->StaticMesh = Stick->StaticMesh;
-		Item->ClassForSpawn = Stick->ClassForSpawn;
-		Item->MainChar = Stick->MainChar;
+		if (Item)
+		{
+			Item->BurnTime = Stick->BurnTime;
+			Item->Name = Stick->Name;
+			Item->SetActorScale3D(Stick->GetActorScale3D());
+			Item->StaticMesh = Stick->StaticMesh;
+			Item->ClassForSpawn = Stick->ClassForSpawn;
+			Item->MainChar = Stick->MainChar;
 
-
-	}
+		}
+	
 }
